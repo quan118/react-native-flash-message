@@ -2,19 +2,18 @@
  * Non-public global class to handle the "default" FlashMessage instance to global use
  */
 class FlashMessageManager {
-  _defaultFlashMessage = null;
+  stack = [];
   register(_ref) {
-    if (!this._defaultFlashMessage && "_id" in _ref) {
-      this._defaultFlashMessage = _ref;
+    if ("_id" in _ref) {
+      this.stack.push(_ref);
     }
   }
   unregister(_ref) {
-    if (!!this._defaultFlashMessage && this._defaultFlashMessage._id === _ref._id) {
-      this._defaultFlashMessage = null;
-    }
+    this.stack = this.stack.filter(item => item._id === _ref.id);
   }
   getDefault() {
-    return this._defaultFlashMessage;
+    if (this.stack.length === 0) return null;
+    return this.stack[this.stack.length - 1];
   }
 }
 

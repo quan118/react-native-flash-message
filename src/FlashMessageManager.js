@@ -9,7 +9,7 @@ class FlashMessageManager {
     }
   }
   unregister(_ref) {
-    this.stack = this.stack.filter(item => item._id === _ref.id);
+    this.stack = this.stack.filter(item => item._id !== _ref._id);
   }
   getDefault() {
     if (this.stack.length === 0) return null;
